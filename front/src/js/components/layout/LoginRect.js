@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 export default class LoginRect extends React.Component {
   render() {
       const style = {
-        rightContainer:{
+        rightContainer: {
             float:'right',
             backgroundColor:"white",
             border: "2px solid",
@@ -14,6 +14,9 @@ export default class LoginRect extends React.Component {
             width: "40%",
             heigth: "60%",
         },
+        registerColor: {
+          backgroundColor: "4c639"
+        }
       };
     return (
         <div style={style.rightContainer}>
@@ -30,8 +33,10 @@ export default class LoginRect extends React.Component {
                floatingLabelText="Password"
                onChange = {(event,newValue) => this.setState({password:newValue})}
                />
-             <br/>
-             <RaisedButton label="Submit" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <br/><br/>
+             <RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleClick(event)}/>
+               <br/><br/>
+             <RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/>
         </div>
     );
   }
