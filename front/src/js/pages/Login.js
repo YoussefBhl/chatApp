@@ -14,28 +14,14 @@ constructor(props){
   this.state={
   username:'',
   password:'',
-  style: {
-    mainContainer: {
-        margin: "0 auto",
-        backgroundColor:"#2f4050",
-        padding: "5%",
-        //paddingRight: "10%"
-    },
 
-    }
   }
  }
  
 render() {
     return (
       <div>
-        <MuiThemeProvider>
-            <div style={this.state.style.mainContainer}>    
-            <Welcome />
-            <LoginRect />   
-         <Footer />
-         </div>
-         </MuiThemeProvider>
+          <LoginRect />   
       </div>
     );
   }

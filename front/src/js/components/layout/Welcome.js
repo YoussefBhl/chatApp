@@ -19,7 +19,7 @@ export default class Welecome extends React.Component {
                     <h4 style={style.whiteFont}>It's a simple web chat application: </h4>
                     <h4 style={style.whiteFont}>The user would create an account and start a new chat exprience.</h4>
                     <h4 style={style.whiteFont}>This aim of this project is to learn new technologies: React, Node and Cypher.</h4>
-                </div>
+        </div>
     );
   }
 }

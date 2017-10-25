@@ -7,7 +7,9 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Transition } from 'react-transition-group'
-import NavBar from '../components/layout/NavBar.js'
+import Footer from '../components/layout/Footer.js'
+import Welcome from '../components/layout/Welcome.js'
+import LoginRect from '../components/layout/LoginRect.js'
 export default class MainPage extends React.Component {
     constructor(props) {
     super(props);
@@ -25,10 +27,22 @@ export default class MainPage extends React.Component {
       };
 
   render() {
+    const style={
+    mainContainer: {
+        margin: "0 auto",
+        backgroundColor:"#2f4050",
+        padding: "5%",
+        //paddingRight: "10%"
+        },
+    }
     return (
-       <MuiThemeProvider>
-       <NavBar />
-       </MuiThemeProvider>
+       <div style={style.mainContainer}>
+         <Welcome />
+         <MuiThemeProvider>
+         {this.props.children}
+         </MuiThemeProvider>
+         <Footer />
+      </div>
     );
   }
 }
