@@ -36,6 +36,7 @@ export default class RegisterRect extends React.Component {
       };
     return (
         <div style={style.rightContainer}>
+          <h2>Sign Up</h2>
             <TextField floatingLabelText="First name" style={style.name}
             onChange = {(event,newValue) => this.setState({username:newValue})}/>
 
