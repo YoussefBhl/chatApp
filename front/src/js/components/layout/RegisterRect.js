@@ -3,9 +3,46 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link } from "react-router";
 import DatePicker from 'material-ui/DatePicker';
+import axios from 'axios';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
+
 export default class RegisterRect extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      birthday: '',
+      sex: ''
+    }
+  }
+  handleClick(event){
+    var apiBaseUrl = "http://127.0.0.1:3000";
+    console.log("values",this.state.firstName,this.state.lastName,this.state.email,this.state.password,this.state.birthday,this.state.sex);
+    //To be done:check for empty values before hitting submit
+    var self = this;
+    var payload={
+    "firstName": this.state.firstName,
+    "lastName": this.state.lastName,
+    "email": this.state.email,
+    "password": this.state.password,
+    "birthdate": "22/02/2018",
+    "sex": this.state.sex,
+    }
+    axios.post(apiBaseUrl+'/register', payload)
+   .then(function (response) {
+     console.log(response);
+     if(response.data.code == 200){
+      console.log("registration successfull");
+     }
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+  }
   render() {
       const style = {
         rightContainer: {
@@ -38,24 +75,29 @@ export default class RegisterRect extends React.Component {
         <div style={style.rightContainer}>
           <h2>Sign Up</h2>
             <TextField floatingLabelText="First name" style={style.name}
-            onChange = {(event,newValue) => this.setState({username:newValue})}/>
+            onChange = {(event,newValue) => this.setState({firstName:newValue})}/>
 
             <TextField floatingLabelText="Last name" style={style.lastName}
-            onChange = {(event,newValue) => this.setState({username:newValue})} />
+            onChange = {(event,newValue) => this.setState({lastName:newValue})} />
 
-              <TextField type="password" floatingLabelText="Password" 
+            <TextField type="email" floatingLabelText="email" 
+              onChange = {(event,newValue) => this.setState({email:newValue})} />   
+
+            <TextField type="password" floatingLabelText="Password" 
               onChange = {(event,newValue) => this.setState({password:newValue})} />
 
-              <DatePicker hintText="Birthday" container="inline" mode="landscape" />
+            <DatePicker hintText="Birthday" container="inline" mode="landscape" 
+              onChange = {(event,newValue) => this.setState({birthday:newValue})} />
 
-              <RadioButtonGroup name="sex">
+            <RadioButtonGroup name="sex" onChange = {(event,newValue) => this.setState({sex:newValue})}>
+            <RadioButton value="male" label="Male" style={style.radioButton} />
 
-              <RadioButton value="male" label="Male" style={style.radioButton} />
-              <RadioButton value="female" label="Female" style={style.radioButton} />
+            <RadioButton value="female" label="Female" style={style.radioButton} />
 
               </RadioButtonGroup>
                <br/><br/>
-             <Link to="home"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Create account"/></Link>
+             <RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Create account" 
+             onClick={(event) => this.handleClick(event)} />
               <br/><br/>
              <Link to="login"><RaisedButton fullWidth={true} label="Login" primary={true} /></Link>
         </div>
