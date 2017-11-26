@@ -29,7 +29,7 @@ export default class RegisterRect extends React.Component {
     "lastName": this.state.lastName,
     "email": this.state.email,
     "password": this.state.password,
-    "birthdate": this.state.birthday,
+    "birthdate": this.state.birthdate,
     "sex": this.state.sex,
     }
     axios.post(apiBaseUrl+'/register', payload)
@@ -85,7 +85,7 @@ export default class RegisterRect extends React.Component {
 
             <TextField type="password" floatingLabelText="Password" 
               onChange = {(event,newValue) => this.setState({password:newValue})} />
-              <input type="date" onChange = {(event) => this.setState({password:event.target.value})} />
+              <input type="date" onChange = {(event) => this.setState({birthdate:event.target.value})} />
 
             <RadioButtonGroup name="sex" onChange = {(event,newValue) => this.setState({sex:newValue})}>
             <RadioButton value="male" label="Male" style={style.radioButton} />
