@@ -3,14 +3,32 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link } from "react-router";
 import axios from 'axios';
-export default class LoginRect extends React.Component {
+import { connect } from 'react-redux';
+import { userActions } from '../../actions/user.actions';
+class LoginPage extends React.Component {
   constructor(props){
     super(props);
     this.state={
       email:'',
       password:'',
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+     handleSubmit(e) {
+        e.preventDefault();
+
+        const { email, password } = this.state;
+        const { dispatch } = this.props;
+        console.log(email, password)
+        if (email && password) {
+            dispatch(userActions.login(email, password));
+        }
+    }
     handleClick(event){
       var apiBaseUrl = "http://127.0.0.1:3000";
       console.log("values",this.state.email,this.state.password);
@@ -57,24 +75,33 @@ export default class LoginRect extends React.Component {
           backgroundColor: "4c639"
         }
       };
+      const { username, password } = this.state;
     return (
         <div style={style.rightContainer}>
             <h1> Welcome To Chat App </h1>
            <TextField
-             floatingLabelText="email"
-             onChange = {(event,newValue) => this.setState({email:newValue})}
+             floatingLabelText="email" value={username} name="email"
+             onChange = {this.handleChange}
              />
            <br/>
              <TextField
                type="password"
-               floatingLabelText="Password"
-               onChange = {(event,newValue) => this.setState({password:newValue})}
+               floatingLabelText="Password" value={password} name="password"
+               onChange = {this.handleChange}
                />
              <br/><br/>
-             <RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleClick(event)}/>
+             <RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/>
                <br/><br/>
              <Link to="register"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/></Link>
         </div>
     );
   }
 }
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return {
+        loggingIn
+    };
+}
+const LoginRect = connect(mapStateToProps)(LoginPage);
+export default LoginRect;

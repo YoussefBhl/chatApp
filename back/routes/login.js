@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var neo4j = require('neo4j');
 var bcrypt = require('bcrypt');
+let jwt = require('jsonwebtoken');
 
 var db = new neo4j.GraphDatabase('http://neo4j:ukcuf@localhost:7474');
 
@@ -23,10 +24,10 @@ router.post('/', function(req, res, next) {
           else if(results.length){
           bcrypt.compare(req.body.password, result.n.properties.password, function(err, doesMatch){
               if (doesMatch){
-              res.send({
-                "code":200,
-                "success":"login sucessfull"
-                  });
+              let token = jwt.sign(result, global.config.jwt_secret, {
+            expiresIn: 1440 // expires in 1 hour
+        });
+        res.json({"code":200, token: token});
             }
             else{
               res.send({
