@@ -1,28 +1,55 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import { Route, Router, Redirect, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { store } from "./store.js"
+import { connect } from 'react-redux';
 import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
 import MainPage from "./pages/MainPage"
 import Register from "./pages/Register"
+import FirstLogin from "./pages/FirstLogin"
+import Footer from './components/layout/Footer.js'
+import Welcome from './components/layout/Welcome.js'
+import LoginRect from './components/layout/LoginRect.js'
+import { history } from './helpers/history';
 
 // setup fake backend
-import { configureFakeBackend } from './helpers/fake-backend.js';
+import { configureFakeBackend } from './helpers/fake-backend';
 configureFakeBackend();
 
 const app = document.getElementById('app');
 
+class App extends React.Component {
+
+  render() {
+    return (
+      <MuiThemeProvider >
+        <div>
+          <Welcome />
+        
+          <div>
+            <Route exact path="/" component={LoginRect}></Route>
+
+            <PrivateRoute path="/test" component={FirstLogin} />
+            <Route path="/register" component={Register}></Route>
+          </div>
+
+
+          <Footer />
+        </div>
+      </MuiThemeProvider>
+    )
+  }
+
+}
+
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-    <Route path="/" component={MainPage}>
-      <IndexRoute component={Login}></IndexRoute>
-      <Route path="login" component={Login}></Route>
-      <Route path="register"  component={Register}></Route>
-    </Route>
+    <Router history={history}>
+      <App />
     </Router>
-    </Provider>,
-app);
+  </Provider>, app);

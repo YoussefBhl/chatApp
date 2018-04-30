@@ -38,9 +38,7 @@ export default class MainPage extends React.Component {
     return (
        <div style={style.mainContainer}>
          <Welcome />
-         <MuiThemeProvider>
-         {this.props.children}
-         </MuiThemeProvider>
+
          <Footer />
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { Link } from "react-router";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { userActions } from '../../actions/user.actions';
@@ -15,6 +15,7 @@ class LoginPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
   handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value });
@@ -90,9 +91,9 @@ class LoginPage extends React.Component {
                onChange = {this.handleChange}
                />
              <br/><br/>
-             <RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/>
+             <Link to="/test"><RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/></Link>
                <br/><br/>
-             <Link to="register"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/></Link>
+             <Link to="/register"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/></Link>
         </div>
     );
   }
@@ -103,5 +104,5 @@ function mapStateToProps(state) {
         loggingIn
     };
 }
-const LoginRect = connect(mapStateToProps)(LoginPage);
+const LoginRect = withRouter(connect(mapStateToProps)(LoginPage));
 export default LoginRect;

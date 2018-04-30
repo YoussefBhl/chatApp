@@ -19,6 +19,7 @@ constructor(props){
  }
  
 render() {
+  console.log("login page")
     return (
       <div>
           <LoginRect />   

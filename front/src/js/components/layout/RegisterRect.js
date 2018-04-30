@@ -1,7 +1,7 @@
 import React from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import DatePicker from 'material-ui/DatePicker';
 import axios from 'axios';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -97,7 +97,7 @@ export default class RegisterRect extends React.Component {
              <RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Create account" 
              onClick={(event) => this.handleClick(event)} />
               <br/><br/>
-             <Link to="login"><RaisedButton fullWidth={true} label="Login" primary={true} /></Link>
+             <Link to="/"><RaisedButton fullWidth={true} label="Login" primary={true} /></Link>
         </div>
     );
   }
