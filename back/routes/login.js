@@ -14,7 +14,8 @@ router.post('/', function(req, res, next) {
               email: req.body.email
           },
       },function (err, results) {
-        var result = results[0];
+        console.log(results)
+        let result = results[0];
           if (err) {
             res.send({
             "code":400,

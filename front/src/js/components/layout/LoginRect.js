@@ -91,7 +91,7 @@ class LoginPage extends React.Component {
                onChange = {this.handleChange}
                />
              <br/><br/>
-             <Link to="/test"><RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/></Link>
+             <Link to="/home"><RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/></Link>
                <br/><br/>
              <Link to="/register"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/></Link>
         </div>

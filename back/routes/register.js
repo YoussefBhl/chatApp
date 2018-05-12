@@ -22,6 +22,7 @@ router.post('/', function(req, res, next) {
         },
     }, function (err, results) {
         if (err) {
+            console.log(err)
             res.send({
             "code":400,
             "failed":"error ocurred"
