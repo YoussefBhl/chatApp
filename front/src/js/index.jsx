@@ -32,7 +32,9 @@ class App extends React.Component {
         
           <div>
             <Route exact path="/" component={LoginRect}></Route>
+
             <PrivateRoute path="/home" component={FirstLogin} />
+
             <Route path="/register" component={Register}></Route>
           </div>
 

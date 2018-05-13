@@ -28,6 +28,7 @@ function login(email, password) {
                     console.log("Login successfull");
                     dispatch(success(user));
                     history.push('/home');
+                    localStorage.setItem('user', JSON.stringify(user));
                     //console.log(history)
                     //var uploadScreen = [];
                     //uploadScreen.push(<UploadScreen appContext={self.props.appContext} />)
@@ -36,12 +37,12 @@ function login(email, password) {
                 else if (user.data.code == 204) {
                     console.log("Username password do not match");
                     alert("username password do not match");
-                    dispatch(failure(error));
+                    dispatch(failure("username password do not match"));
                 }
                 else {
                     console.log("Username does not exists");
                     alert("Username does not exist");
-                    dispatch(failure(error));
+                    dispatch(failure("username password do not match"));
                 }
             }, 
         error =>{
@@ -72,7 +73,8 @@ function login(email, password) {
 }
 
 function logout() {
-    userService.logout();
+    localStorage.removeItem('user');
+    //userService.logout();
     return { type: userConstants.LOGOUT };
 }
 
