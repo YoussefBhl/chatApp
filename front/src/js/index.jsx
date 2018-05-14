@@ -26,7 +26,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider >
+
         <div>
           <Welcome />
         
@@ -41,7 +41,6 @@ class App extends React.Component {
 
           <Footer />
         </div>
-      </MuiThemeProvider>
     )
   }
 

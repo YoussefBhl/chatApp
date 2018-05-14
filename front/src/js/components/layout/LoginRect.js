@@ -1,6 +1,7 @@
 import React from "react";
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+//import RaisedButton from 'material-ui/RaisedButton';
+import { Button, Input, Icon } from 'semantic-ui-react'
+//import TextField from 'material-ui/TextField';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -80,20 +81,27 @@ class LoginPage extends React.Component {
     return (
         <div style={style.rightContainer}>
             <h1> Welcome To Chat App </h1>
-           <TextField
-             floatingLabelText="email" value={username} name="email"
+            <br />
+           <Input
+             placeholder="Email" value={username} name="email" size='huge'
+             iconPosition='left' fluid
              onChange = {this.handleChange}
-             />
-           <br/>
-             <TextField
-               type="password"
-               floatingLabelText="Password" value={password} name="password"
+             >
+             <Icon name='at' />
+               <input />
+               </Input>
+             <Input
+               type="password" size='huge' fluid iconPosition='left'
+               placeholder="Password" value={password} name="password"
                onChange = {this.handleChange}
-               />
+               >
+               <Icon name='lock' />
+               <input />
+               </Input>
              <br/><br/>
-             <Link to="/home"><RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)}/></Link>
-               <br/><br/>
-             <Link to="/register"><RaisedButton backgroundColor="#a4c639"  fullWidth={true} label="Register"/></Link>
+             <Link to="/home"><Button primary fluid size='massive' onClick={(event) => this.handleSubmit(event)} > Login </Button>
+             </Link>
+             <Link to="/register"><Button fluid size='massive' > Register </Button> </Link>
         </div>
     );
   }

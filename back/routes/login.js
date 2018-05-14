@@ -14,7 +14,6 @@ router.post('/', function(req, res, next) {
               email: req.body.email
           },
       },function (err, results) {
-        console.log(results)
         let result = results[0];
           if (err) {
             res.send({
@@ -28,7 +27,10 @@ router.post('/', function(req, res, next) {
               let token = jwt.sign(result, global.config.jwt_secret, {
             expiresIn: 1440 // expires in 1 hour
         });
-        res.json({"code":200, token: token});
+        let userDetail = result.n.properties;
+        delete userDetail.password;
+        console.log(userDetail)
+        res.json({"code":200, token: token, user: userDetail});
             }
             else{
               res.send({

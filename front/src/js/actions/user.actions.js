@@ -12,7 +12,7 @@ export const userActions = {
 
 function login(email, password) {
     return dispatch => {
-        dispatch(request({ email })); 
+        dispatch(request({ email }));
         console.log("values", email, password);
         //To be done:check for empty values before hitting submit
         var self = this;
@@ -22,49 +22,33 @@ function login(email, password) {
         }
         axios.post(apiBaseUrl + '/login', payload)
             .then(
-                user => {
-                console.log(user);
-                if (user.data.code == 200) {
-                    console.log("Login successfull");
-                    dispatch(success(user));
-                    history.push('/home');
-                    localStorage.setItem('user', JSON.stringify(user));
-                    //console.log(history)
-                    //var uploadScreen = [];
-                    //uploadScreen.push(<UploadScreen appContext={self.props.appContext} />)
-                    //self.props.appContext.setState({ loginPage: [], uploadScreen: uploadScreen })
-                }
-                else if (user.data.code == 204) {
-                    console.log("Username password do not match");
-                    alert("username password do not match");
-                    dispatch(failure("username password do not match"));
-                }
-                else {
-                    console.log("Username does not exists");
-                    alert("Username does not exist");
-                    dispatch(failure("username password do not match"));
-                }
-            }, 
-        error =>{
-            console.log(error);
-            dispatch(failure(error));
-        })
-            /*.catch(function (error) {
-                console.log(error);
-                dispatch(failure(error));
-            });
-       /* userService.login(username, password)
-            .then(
-                user => {
-                    dispatch(success(user));
-                    history.push('/home');
-                    console.log(history)
+                result => {
+                    let user = {
+                        user: result.data.user,
+                        token: result.data.token
+                    }
+                    console.log(user);
+                    if (result.data.code == 200) {
+                        console.log("Login successfull");
+                        dispatch(success(user));
+                        localStorage.setItem('user', JSON.stringify(user));
+                        history.push('/home');
+                    }
+                    else if (result.data.code == 204) {
+                        console.log("Username password do not match");
+                        alert("username password do not match");
+                        dispatch(failure("username password do not match"));
+                    }
+                    else {
+                        console.log("Username does not exists");
+                        alert("Username does not exist");
+                        dispatch(failure("username password do not match"));
+                    }
                 },
                 error => {
+                    console.log(error);
                     dispatch(failure(error));
-                    //dispatch(alertActions.error(error));
-                }
-            );*/
+                })
     };
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
@@ -74,6 +58,7 @@ function login(email, password) {
 
 function logout() {
     localStorage.removeItem('user');
+    history.push('/');
     //userService.logout();
     return { type: userConstants.LOGOUT };
 }
