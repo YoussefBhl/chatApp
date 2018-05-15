@@ -65,13 +65,13 @@ class LoginPage extends React.Component {
   render() {
       const style = {
         rightContainer: {
-            float:'right',
+            //float:'right',
             backgroundColor:"white",
             border: "2px solid",
             borderRadius: "25px",
             padding: "5%",
-            width: "40%",
-            heigth: "60%",
+            //width: "40%",
+            //heigth: "60%",
         },
         registerColor: {
           backgroundColor: "4c639"

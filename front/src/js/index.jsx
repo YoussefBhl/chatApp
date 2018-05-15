@@ -12,7 +12,7 @@ import MainPage from "./pages/MainPage"
 import Register from "./pages/Register"
 import FirstLogin from "./pages/FirstLogin"
 import Footer from './components/layout/Footer.js'
-import Welcome from './components/layout/Welcome.js'
+
 import LoginRect from './components/layout/LoginRect.js'
 import { history } from './helpers/history';
 
@@ -28,18 +28,15 @@ class App extends React.Component {
     return (
 
         <div>
-          <Welcome />
         
           <div>
-            <Route exact path="/" component={LoginRect}></Route>
+            <Route exact path="/" component={Login}></Route>
 
             <PrivateRoute path="/home" component={FirstLogin} />
 
             <Route path="/register" component={Register}></Route>
           </div>
 
-
-          <Footer />
         </div>
     )
   }
