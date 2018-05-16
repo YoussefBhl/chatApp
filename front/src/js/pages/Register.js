@@ -1,8 +1,5 @@
 import React from "react";
 import { Grid } from 'semantic-ui-react'
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import Footer from '../components/layout/Footer.js'
 import RegisterRect from '../components/layout/RegisterRect.js'
 import Welcome from '../components/layout/Welcome.js'

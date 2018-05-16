@@ -1,10 +1,9 @@
 import React from "react";
-import { Button, Input, Checkbox, Form, Grid } from 'semantic-ui-react'
+import { Button, Input, Checkbox, Form, Grid, Icon } from 'semantic-ui-react'
 
 import { Link } from "react-router-dom";
 
 import axios from 'axios';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 
 export default class RegisterRect extends React.Component {
@@ -24,7 +23,7 @@ export default class RegisterRect extends React.Component {
     var apiBaseUrl = "http://127.0.0.1:3000";
     //To be done:check for empty values before hitting submit
     var self = this;
-    
+
     var payload = {
       "firstName": this.state.firstName,
       "lastName": this.state.lastName,
@@ -51,23 +50,7 @@ export default class RegisterRect extends React.Component {
         border: "2px solid",
         borderRadius: "25px",
         padding: "5%",
-      },
-      registerColor: {
-        backgroundColor: "4c639"
-      },
-      name: {
-        float: "left",
-        width: "40%",
-        display: "inline"
-      },
-      lastName: {
-        float: "right",
-        width: "40%",
-        display: "inline"
-      },
-      radioButton: {
-        marginBottom: 16,
-      },
+      }
     };
     return (
       <div style={style.rightContainer}>
@@ -78,30 +61,53 @@ export default class RegisterRect extends React.Component {
           </Grid.Row>
           <Grid.Row centered>
             <Grid.Column width={8}>
-              <Input placeholder="First name" size="large" fluid
-                onChange={(event, newValue) => this.setState({ firstName: newValue.value })} />
+              <Input placeholder="First name" size="large" fluid iconPosition='left'
+                onChange={(event, newValue) => this.setState({ firstName: newValue.value })} >
+                <Icon name='user circle' />
+                <input />
+              </Input>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Input placeholder="Last name" size="large" fluid
-                onChange={(event, newValue) => this.setState({ lastName: newValue.value })} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={8}>
-              <Input type="email" placeholder="email" size="large" fluid
-                onChange={(event, newValue) => this.setState({ email: newValue.value })} />
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Input type="password" placeholder="Password" size="large" fluid
-                onChange={(event, newValue) => this.setState({ password: newValue.value })} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row centered>
-            <input type="date" onChange={(event) => this.setState({ birthdate: event.target.value })} />
+              <Input placeholder="Last name" size="large" fluid iconPosition='left'
+                onChange={(event, newValue) => this.setState({ lastName: newValue.value })} >
 
+                <Icon name='user circle' />
+                <input />
+              </Input>
+
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row centered>
+            <Grid.Column width={8}>
+              <Input type="email" placeholder="email" size="large" fluid iconPosition='left'
+                onChange={(event, newValue) => this.setState({ email: newValue.value })} >
+
+                <Icon name='at' />
+                <input />
+              </Input>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Input type="password" placeholder="Password" size="large" fluid iconPosition='left'
+                onChange={(event, newValue) => this.setState({ password: newValue.value })}>
+
+                <Icon name='lock' />
+                <input />
+              </Input>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row centered>
+          <Grid.Column width={4}>
+          <h5> Birthdate: </h5>
+          </Grid.Column>
+          <Grid.Column width={8}>
+            <input type="date" onChange={(event) => this.setState({ birthdate: event.target.value })} />
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row centered>
             <Form>
+              <Form.Field>
+                Select gender:
+              </Form.Field>
               <Form.Field>
                 <Checkbox
                   label='Male'
@@ -124,9 +130,9 @@ export default class RegisterRect extends React.Component {
           </Grid.Row>
         </Grid>
         <br /><br />
-        <Button fluid
+        <Button fluid primary
           onClick={(event) => this.handleClick(event)} fluid size='massive'> Create account</Button>
-        <Link to="/"><Button primary={true} fluid size='massive'>Login</Button>
+        <Link to="/"><Button fluid size='massive'>Login</Button>
         </Link>
 
       </div>

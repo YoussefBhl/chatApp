@@ -1,8 +1,6 @@
 import React from "react";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+
+import { Button, Input, Icon } from 'semantic-ui-react';
 import Footer from '../components/layout/Footer.js'
 import LoginRect from '../components/layout/LoginRect.js'
 import Welcome from '../components/layout/Welcome.js'
@@ -34,7 +32,7 @@ class FirstLoginComponent extends React.Component {
                 <h1>Hi {this.props.user.user.sex}!</h1>
                 <p>You're logged in with React & JWT!!</p>
                 <h3>Users from secure api end point:</h3>
-                    <RaisedButton fullWidth={true} label="Login" primary={true} onClick={(event) => this.handleSubmit(event)} />
+                    <Button  primary onClick={(event) => this.handleSubmit(event)} >Logout</Button>
             </div>
         );
     }

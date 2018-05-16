@@ -7,46 +7,46 @@ let jwt = require('jsonwebtoken');
 var db = new neo4j.GraphDatabase('http://neo4j:ukcuf@localhost:7474');
 
 /* GET users listing. */
-router.post('/', function(req, res, next) {
-    db.cypher({   
-          query: 'MATCH (n:users) WHERE n.email={email} return n',
-          params: {
-              email: req.body.email
-          },
-      },function (err, results) {
-        let result = results[0];
-          if (err) {
-            res.send({
-            "code":400,
-            "failed":"error ocurred"
-            })
-          }
-          else if(results.length){
-          bcrypt.compare(req.body.password, result.n.properties.password, function(err, doesMatch){
-              if (doesMatch){
-              let token = jwt.sign(result, global.config.jwt_secret, {
+router.post('/', function (req, res, next) {
+  db.cypher({
+    query: 'MATCH (n:users) WHERE n.email={email} return n',
+    params: {
+      email: req.body.email
+    },
+  }, function (err, results) {
+    let result = results[0];
+    if (err) {
+      res.send({
+        "code": 400,
+        "failed": "error ocurred"
+      })
+    }
+    else if (results.length) {
+      bcrypt.compare(req.body.password, result.n.properties.password, function (err, doesMatch) {
+        if (doesMatch) {
+          let token = jwt.sign(result, global.config.jwt_secret, {
             expiresIn: 1440 // expires in 1 hour
-        });
-        let userDetail = result.n.properties;
-        delete userDetail.password;
-        console.log(userDetail)
-        res.json({"code":200, token: token, user: userDetail});
-            }
-            else{
-              res.send({
-                "code":204,
-                "success": "password does not match"
-                  });
-            }
           });
-          }
-          else{
-            res.send({
-              "code":204,
-              "success":"Email does not exits"
-                });
-          }
-    });
+          let userDetail = result.n.properties;
+          delete userDetail.password;
+          console.log(userDetail)
+          res.json({ "code": 200, token: token, user: userDetail });
+        }
+        else {
+          res.send({
+            "code": 204,
+            "success": "password does not match"
+          });
+        }
+      });
+    }
+    else {
+      res.send({
+        "code": 204,
+        "success": "Email does not exits"
+      });
+    }
+  });
 });
 
 module.exports = router;

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Route, Router, Redirect, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { store } from "./store.js"
 import { connect } from 'react-redux';
 import Login from "./pages/Login";
