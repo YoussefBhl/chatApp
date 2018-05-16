@@ -10,6 +10,7 @@ class LoginPage extends React.Component {
     this.state={
       email:'',
       password:'',
+      submitted: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,11 +22,12 @@ class LoginPage extends React.Component {
     }
      handleSubmit(e) {
         e.preventDefault();
-
+        this.setState({submitted:true});
         const { email, password } = this.state;
         const { dispatch } = this.props;
         console.log(email, password)
-        if (email && password) {
+        //password length temporary >0
+        if (email && password.length>0) {
             dispatch(userActions.login(email, password));
         }
     }
@@ -41,22 +43,22 @@ class LoginPage extends React.Component {
           backgroundColor: "4c639"
         }
       };
-      const { username, password } = this.state;
+      const { email, password, submitted } = this.state;
     return (
         <div style={style.rightContainer}>
             <h1> Welcome To Chat App </h1>
             <br />
            <Input
-             placeholder="Email" value={username} name="email" size='huge'
-             iconPosition='left' fluid
+             placeholder="Email" value={email} name="email" size='huge' error={submitted && (!email.includes('@') || email.length<3)  ? true: false}
+             iconPosition='left' fluid action={true}  type="email" actionPosition='left'
              onChange = {this.handleChange}
              >
              <Icon name='at' />
                <input />
                </Input>
              <Input
-               type="password" size='huge' fluid iconPosition='left'
-               placeholder="Password" value={password} name="password"
+               type="password" size='huge' fluid iconPosition='left'  action={true}
+               placeholder="Password" value={password} name="password"  error={submitted &&  password.length<7  ? true: false}
                onChange = {this.handleChange}
                >
                <Icon name='lock' />
