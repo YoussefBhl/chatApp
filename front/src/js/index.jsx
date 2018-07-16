@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { store } from "./store.js"
 import { connect } from 'react-redux';
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import PrivateRoute from "./components/PrivateRoute";
 import MainPage from "./pages/MainPage"
 import Register from "./pages/Register"
