@@ -8,13 +8,10 @@ import { connect } from 'react-redux';
 import Login from "./pages/login";
 import PrivateRoute from "./components/PrivateRoute";
 import MainPage from "./pages/MainPage"
-import Register from "./pages/Register"
+import Register from "./pages/register"
 import FirstLogin from "./pages/FirstLogin"
 import Footer from './components/layout/Footer.js'
-
-import LoginRect from './components/layout/LoginRect.js'
 import { history } from './helpers/history';
-
 // setup fake backend
 import { configureFakeBackend } from './helpers/fake-backend';
 configureFakeBackend();
@@ -25,17 +22,12 @@ class App extends React.Component {
 
   render() {
     return (
-
         <div>
-        
           <div>
             <Route exact path="/" component={Login}></Route>
-
             <PrivateRoute path="/home" component={FirstLogin} />
-
             <Route path="/register" component={Register}></Route>
           </div>
-
         </div>
     )
   }

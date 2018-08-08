@@ -2,12 +2,9 @@ import React from "react";
 
 import { Button, Input, Icon } from 'semantic-ui-react';
 import Footer from '../components/layout/Footer.js'
-import LoginRect from '../components/layout/LoginRect.js'
 import Welcome from '../components/layout/Welcome.js'
-
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { userActions } from '../actions/user.actions';
 
 class FirstLoginComponent extends React.Component {

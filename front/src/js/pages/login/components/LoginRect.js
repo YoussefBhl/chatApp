@@ -3,7 +3,7 @@ import { Button, Input, Icon } from 'semantic-ui-react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { userActions } from '../../actions/user.actions';
+import { userActions } from '../../../actions/user.actions';
 class LoginPage extends React.Component {
   constructor(props){
     super(props);
