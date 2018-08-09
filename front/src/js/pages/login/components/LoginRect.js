@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Input, Icon } from 'semantic-ui-react';
-import { Link, withRouter } from "react-router-dom";
-import axios from 'axios';
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { userActions } from '../../../actions/user.actions';
 class LoginPage extends React.Component {
@@ -25,7 +24,6 @@ class LoginPage extends React.Component {
         this.setState({submitted:true});
         const { email, password } = this.state;
         const { dispatch } = this.props;
-        console.log(email, password)
         //password length temporary >0
         if (email && password.length>0) {
             dispatch(userActions.login(email, password));
@@ -51,16 +49,14 @@ class LoginPage extends React.Component {
            <Input
              placeholder="Email" value={email} name="email" size='huge' error={submitted && (!email.includes('@') || email.length<3)  ? true: false}
              iconPosition='left' fluid action={true}  type="email" actionPosition='left'
-             onChange = {this.handleChange}
-             >
+             onChange = {this.handleChange}>
              <Icon name='at' />
                <input />
                </Input>
              <Input
                type="password" size='huge' fluid iconPosition='left'  action={true}
                placeholder="Password" value={password} name="password"  error={submitted &&  password.length<7  ? true: false}
-               onChange = {this.handleChange}
-               >
+               onChange = {this.handleChange}>
                <Icon name='lock' />
                <input />
                </Input>
@@ -78,5 +74,5 @@ function mapStateToProps(state) {
         loggingIn
     };
 }
-const LoginRect = withRouter(connect(mapStateToProps)(LoginPage));
+const LoginRect = connect(mapStateToProps)(LoginPage);
 export default LoginRect;

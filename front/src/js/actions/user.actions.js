@@ -7,7 +7,7 @@ let apiBaseUrl = "http://127.0.0.1:3000";
 export const userActions = {
     login,
     logout,
-    getAll
+    signup
 };
 
 function login(email, password) {
@@ -55,29 +55,42 @@ function login(email, password) {
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
-
 function logout() {
     localStorage.removeItem('user');
     history.push('/');
     //userService.logout();
     return { type: userConstants.LOGOUT };
 }
-
-function getAll() {
+function signup(payload) {
     return dispatch => {
-        dispatch(request());
+        dispatch(request({ payload }));
+        //To be done:check for empty values before hitting submit
+        var self = this;
+        axios.post(apiBaseUrl + '/register', payload)
+            .then(function (response) {
+                console.log(response);
+                result => {
+                    let user = {
+                        user: result.data.user,
+                        token: result.data.token
+                    }
+                    if (response.data.code == 200) {
+                        console.log("registration successfull");
+                        dispatch(success(user));
+                        localStorage.setItem('user', JSON.stringify(user));
+                        history.push('/home');
+                    }
+                    else
+                        dispatch(failure("username password do not match"));
 
-        userService.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => {
-                    dispatch(failure(error));
-                    //dispatch(alertActions.error(error))
-                }
-            );
-    };
-
-    function request() { return { type: userConstants.GETALL_REQUEST } }
-    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+                },
+                    error => {
+                        console.log(error);
+                        dispatch(failure(error));
+                    }
+            })
+        function request(user) { return { type: userConstants.SIGNUP_REQUEST, user } }
+        function success(user) { return { type: userConstants.SIGNUP_SUCCESS, user } }
+        function failure(error) { return { type: userConstants.SIGNUP_FAILURE, error } }
+    }
 }

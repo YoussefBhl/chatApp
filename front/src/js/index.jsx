@@ -1,16 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Router, Redirect, BrowserRouter } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { store } from "./store.js"
-import { connect } from 'react-redux';
 import Login from "./pages/login";
 import PrivateRoute from "./components/PrivateRoute";
-import MainPage from "./pages/MainPage"
 import Register from "./pages/register"
-import FirstLogin from "./pages/FirstLogin"
-import Footer from './components/layout/Footer.js'
+import Home from "./pages/home"
 import { history } from './helpers/history';
 // setup fake backend
 import { configureFakeBackend } from './helpers/fake-backend';
@@ -25,7 +21,7 @@ class App extends React.Component {
         <div>
           <div>
             <Route exact path="/" component={Login}></Route>
-            <PrivateRoute path="/home" component={FirstLogin} />
+            <PrivateRoute path="/home" component={Home} />
             <Route path="/register" component={Register}></Route>
           </div>
         </div>

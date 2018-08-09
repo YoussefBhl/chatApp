@@ -1,13 +1,11 @@
 import React from "react";
-
 import { Button, Input, Icon } from 'semantic-ui-react';
-import Footer from '../components/layout/Footer.js'
-import Welcome from '../components/layout/Welcome.js'
+import Footer from '../../common/components/Footer';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../actions/user.actions';
+import { userActions } from '../../actions/user.actions';
 
-class FirstLoginComponent extends React.Component {
+class Home extends React.Component {
 
     constructor(props) {
         super(props);
@@ -42,7 +40,7 @@ function mapStateToProps(state) {
     };
 }
 
-const FirstLogin = withRouter(connect(mapStateToProps)(FirstLoginComponent));
-export default FirstLogin;
+Home = connect(mapStateToProps)(Home);
+export default Home;
 
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from 'semantic-ui-react'
-import Footer from '../../components/layout/Footer.js'
+import Footer from '../../common/components/Footer'
 import RegisterRect from './components/RegisterRect'
-import Welcome from '../../components/layout/Welcome.js'
+import Welcome from '../../common/components/Welcome.js'
 export default class Register extends React.Component {
 
   render() {

@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from 'semantic-ui-react/dist/commonjs'
-import Footer from '../../components/layout/Footer.js'
+import Footer from '../../common/components/Footer'
 import LoginRect from './components/LoginRect'
-import Welcome from '../../components/layout/Welcome'
+import Welcome from '../../common/components/Welcome'
 document.body.style.backgroundColor = "#2f4050";
 export default class Login extends React.Component {
 
