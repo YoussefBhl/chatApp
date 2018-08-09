@@ -4,13 +4,10 @@ import { Route, Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { store } from "./store.js"
 import Login from "./pages/login";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./common/components/PrivateRoute";
 import Register from "./pages/register"
 import Home from "./pages/home"
 import { history } from './helpers/history';
-// setup fake backend
-import { configureFakeBackend } from './helpers/fake-backend';
-configureFakeBackend();
 
 const app = document.getElementById('app');
 
@@ -27,9 +24,7 @@ class App extends React.Component {
         </div>
     )
   }
-
 }
-
 
 ReactDOM.render(
   <Provider store={store}>

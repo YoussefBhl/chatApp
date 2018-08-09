@@ -1,32 +1,29 @@
 import React from "react";
-import { Grid, Image, Divider } from 'semantic-ui-react'
-
-export default class Footer extends React.Component {
-  render() {
-    const style = {
-    rightP:{
+import { Grid, Row, Col } from 'react-bootstrap';
+const Footer = (props) => {
+  const style = {
+    rightP: {
       float: 'right'
     },
-    leftP:{
+    leftP: {
       float: 'left'
     }
   };
-    return (
-      <footer>
-        <Divider clearing />
-        <Grid container columns={2}>
-        
-          
-          <Grid.Column>
-          
+  return (
+    <footer>
+      <Grid>
+        <Row>
+        <hr />
+          <Col md={6}>
             <p style={style.leftP}>Copyright &copy; ChatApp</p>
-            </Grid.Column>
-            <Grid.Column >
-            
+          </Col>
+          <Col md={6}>
             <p style={style.rightP}>2017-2018</p>
-            </Grid.Column>
-        </Grid>
-      </footer>
-    );
-  }
-}
+          </Col>
+        </Row>
+      </Grid>
+    </footer>
+  );
+};
+
+export default Footer;

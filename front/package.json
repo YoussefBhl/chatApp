@@ -16,6 +16,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "history": "^4.6.3",
     "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.1.2",
@@ -27,6 +28,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "devDependencies": {
+    "css-loader": "^1.0.0",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"
   },

@@ -1,16 +1,17 @@
 import React from "react";
-import { Button, Input, Icon } from 'semantic-ui-react';
+import { Button } from 'react-bootstrap';
 import Footer from '../../common/components/Footer';
-import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../../actions/user.actions';
+import Navbar from '../../common/components/NavBar'
 
 class Home extends React.Component {
-
     constructor(props) {
         super(props);
-
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount() {
+        document.body.style.backgroundColor = "white";
     }
     handleSubmit() {
         const { dispatch } = this.props;
@@ -21,7 +22,8 @@ class Home extends React.Component {
         console.log("this is home")
         console.log(this.props)
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div>
+                <Navbar />
                 <h1>Hi {this.props.user.user.firstName}!</h1>
                 <h1>Hi {this.props.user.user.lastName}!</h1>
                 <h1>Hi {this.props.user.user.sex}!</h1>
