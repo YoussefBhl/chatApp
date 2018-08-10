@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Footer from '../../common/components/Footer';
 import { connect } from 'react-redux';
 import { userActions } from '../../actions/user.actions';
-import Navbar from '../../common/components/NavBar'
+import Header from '../../common/components/NavBar'
 
 class Home extends React.Component {
     constructor(props) {
@@ -23,13 +23,13 @@ class Home extends React.Component {
         console.log(this.props)
         return (
             <div>
-                <Navbar />
+                <Header />
                 <h1>Hi {this.props.user.user.firstName}!</h1>
                 <h1>Hi {this.props.user.user.lastName}!</h1>
                 <h1>Hi {this.props.user.user.sex}!</h1>
                 <p>You're logged in with React & JWT!!</p>
                 <h3>Users from secure api end point:</h3>
-                    <Button  primary onClick={(event) => this.handleSubmit(event)} >Logout</Button>
+                    <Button  onClick={(event) => this.handleSubmit(event)} >Logout</Button>
             </div>
         );
     }

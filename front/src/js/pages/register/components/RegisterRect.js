@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input, Checkbox, Form, Grid, Icon, Message } from 'semantic-ui-react'
+import { Button, Grid, Row, Col, Glyphicon, Radio, FormGroup, InputGroup, FormControl } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -21,16 +21,14 @@ class RegisterRect extends React.Component {
       showError: false
     }
   }
-  handleChangeRadio = (e, newValue) => this.setState({ sex: newValue.value });
+  handleChangeRadio = (e) => this.setState({ sex: e.target.value });
   handleClick(event) {
-    console.log(this.props)
     this.setState({ submitted: true });
     this.setState({ showError: false });
     //To be done:check for empty values before hitting submit
     if (this.state.firstName && this.state.lastName && this.state.email.includes('@') && this.state.email.length > 2
       && this.state.password.length > 6 && this.state.birthdate && this.state.sex) {
-      var self = this;
-      var payload = {
+      let payload = {
         "firstName": this.state.firstName,
         "lastName": this.state.lastName,
         "email": this.state.email,
@@ -38,6 +36,7 @@ class RegisterRect extends React.Component {
         "birthdate": this.state.birthdate,
         "sex": this.state.sex,
       }
+      console.log(payload)
       const { dispatch } = this.props;
       dispatch(userActions.signup(payload));
     }
@@ -57,91 +56,76 @@ class RegisterRect extends React.Component {
     const { firstName, password, lastName, submitted, email, birthdate, sex, showError } = this.state;
     return (
       <div style={style.rightContainer}>
-        <Grid centered>
-          <Grid.Row centered>
-            <h2>Sign Up</h2>
-
-          </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={8}>
-              <Input placeholder="First name" size="large" fluid iconPosition='left' error={submitted && !firstName ? true : false}
-                onChange={(event, newValue) => (this.setState({ firstName: newValue.value }))} >
-                <Icon name='user circle' />
-                <input />
-              </Input>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Input placeholder="Last name" size="large" fluid iconPosition='left' error={submitted && !lastName ? true : false}
-                onChange={(event, newValue) => this.setState({ lastName: newValue.value })} >
-
-                <Icon name='user circle' />
-                <input />
-              </Input>
-
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={8}>
-              <Input type="email" placeholder="email" size="large" fluid iconPosition='left' error={submitted && (!email.includes('@') || email.length < 3) ? true : false}
-                onChange={(event, newValue) => this.setState({ email: newValue.value })} >
-
-                <Icon name='at' />
-                <input />
-              </Input>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Input type="password" placeholder="Password" size="large" fluid iconPosition='left' error={submitted && password.length < 7 ? true : false}
-                onChange={(event, newValue) => this.setState({ password: newValue.value })}>
-
-                <Icon name='lock' />
-                <input />
-              </Input>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={4}>
-              <h5> Birthdate: </h5>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <input type="date" onChange={(event) => this.setState({ birthdate: event.target.value })} />
-              {(submitted && !birthdate) ? (<Message error header='False Birthdate' size='mini' />) : (null)}
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row centered>
-            <Form error>
-              <Form.Field>
-                Select gender:
-              </Form.Field>
-              <Form.Field>
-                <Form.Checkbox
-                  label='Male'
-                  name='radioGroup'
-                  value='male'
-                  checked={this.state.sex === 'male'}
-                  onChange={this.handleChangeRadio}
-                  error={submitted && !sex ? true : false}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Checkbox
-                  label='Female'
-                  name='radioGroup'
-                  value='female'
-                  error={submitted && !sex ? true : false}
-                  checked={this.state.sex === 'female'}
-                  onChange={this.handleChangeRadio}
-                />
-              </Form.Field>
-            </Form>
-          </Grid.Row>
+        <Grid>
+          <Row>
+            <Col md={2} mdOffset={2}>
+              <h2>Sign Up</h2>
+            </Col>
+          </Row>
+          <Row>
+            <br />
+            <Col md={3}>
+              <InputGroup>
+                <InputGroup.Addon><Glyphicon glyph='user' /></InputGroup.Addon>
+                <FormControl type="text" placeholder="First name" 
+                  onChange={(e) => (this.setState({ firstName: e.target.value }))} />
+              </InputGroup>
+            </Col>
+            <Col md={3}>
+              <InputGroup>
+                <InputGroup.Addon><Glyphicon glyph='user' /></InputGroup.Addon>
+                <FormControl type="text" placeholder="Last name" 
+                  onChange={(e) => this.setState({ lastName: e.target.value })} />
+              </InputGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={3}>
+              <InputGroup>
+                <InputGroup.Addon><Glyphicon glyph='envelope' /></InputGroup.Addon>
+                <FormControl type="email" placeholder="email" 
+                  onChange={(e) => this.setState({ email: e.target.value })} />
+              </InputGroup>
+            </Col>
+            <Col md={3}>
+              <InputGroup>
+                <InputGroup.Addon><Glyphicon glyph='lock' /></InputGroup.Addon>
+                <FormControl type="password" placeholder="Password" 
+                  onChange={(e) => this.setState({ password: e.target.value })} />
+              </InputGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={3} mdOffset={1}>
+              <InputGroup>
+                <InputGroup.Addon>Birthdate</InputGroup.Addon>
+                <FormControl type="date" onChange={(event) => this.setState({ birthdate: event.target.value })} />
+              </InputGroup>
+              {(submitted && !birthdate) ? (<p>False Birthdate</p>) : (null)}
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <form >
+              Select gender:
+                <FormGroup>
+                <Radio name='radioGroup' value="male"
+                  onChange={this.handleChangeRadio}>Male</Radio>
+                <Radio
+                  name='radioGroup' value="female"
+                  onChange={this.handleChangeRadio}>Female</Radio>
+              </FormGroup>
+            </form>
+          </Row>
         </Grid>
         <br /><br />
-        {(showError) ? (<Message error header='Input Error' content="check input please" size='big' />) : (null)}
-        <Button fluid primary
-          onClick={(event) => this.handleClick(event)} fluid size='massive'> Create account</Button>
-        <Link to="/"><Button fluid size='massive'>Login</Button>
+        {(showError) ? (<p>check input please </p>) : (null)}
+        <Button bsStyle="primary" block bsSize="large"
+          onClick={(event) => this.handleClick(event)}> Create account</Button>
+        <Link to="/"><Button block bsSize="large">Login</Button>
         </Link>
-
       </div>
     );
   }

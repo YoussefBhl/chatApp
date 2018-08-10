@@ -19,10 +19,10 @@ export default class Login extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col md={6}>
+          <Col md={5}>
             <Welcome />
           </Col>
-          <Col md={6}>
+          <Col md={7}>
             <LoginRect />
           </Col>
         </Row>

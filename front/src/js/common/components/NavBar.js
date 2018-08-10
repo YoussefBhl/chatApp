@@ -1,7 +1,6 @@
 import React from "react";
-import { Menu, Segment, Input, Image, Dropdown, Header } from 'semantic-ui-react'
-
-export default class Navbar extends React.Component {
+import { Navbar, NavDropdown, MenuItem, Nav, FormGroup, FormControl, NavItem, Button } from 'react-bootstrap';
+export default class Header extends React.Component {
   state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -28,34 +27,37 @@ export default class Navbar extends React.Component {
         content: 'This Month',
       },
     ]
-    
     return (
-      <div style={{ backgroundColor: '#2f4050' }}>
-        <Menu pointing secondary color='violet'>
-          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item>
-            <Input icon='search' placeholder='Search...' />
-          </Menu.Item>
-          <Menu.Menu position='right'>
-            <Header >
-            <Image size='small' wrapped src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
-            <Header.Content>
-              <Dropdown inline options={options} />
-              </Header.Content>
-            </Header>
-          </Menu.Menu>
-        </Menu>
-      </div>
+      <Navbar inverse fluid>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="home">ChatApp</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="#">
+              Home
+      </NavItem>
+            <NavItem eventKey={2} href="#">
+              Friends
+      </NavItem>
+            <NavItem eventKey={3} href="#">
+              messages
+      </NavItem>
+          </Nav>
+          <Nav pullRight>
+            <NavDropdown eventKey={4} title="Dropdown" id="basic-nav-dropdown">
+              <MenuItem eventKey={4.1}>Action</MenuItem>
+              <MenuItem eventKey={4.2}>Another action</MenuItem>
+              <MenuItem eventKey={4.3}>Something else here</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={4.3}>Separated link</MenuItem>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   }
 }

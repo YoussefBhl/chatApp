@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, InputGroup, FormControl, Glyphicon, Grid, Col, Row } from 'react-bootstrap';
 import { userActions } from '../../../actions/user.actions';
-//btn color #1678c2
+//btn color #1678c2 navbar 2f4050
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +24,6 @@ class LoginPage extends React.Component {
     this.setState({ submitted: true });
     const { email, password } = this.state;
     const { dispatch } = this.props;
-    console.log(email)
-    console.log(email)
     //password length temporary >0
     if (email && password.length > 0) {
       dispatch(userActions.login(email, password));
@@ -48,21 +46,29 @@ class LoginPage extends React.Component {
       <div style={style.rightContainer}>
         <h1> Welcome To Chat App </h1>
         <br />
-        <form>
-          <div className="input-group" style={{height:"70px"}}>
-            <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-            <input  type="text" className="form-control" name="email" placeholder="Email" style={{height:"100%"}}
-              onChange={(e)=> this.setState({email: e.target.value })}/>
-          </div>
-          <div className="input-group" style={{height:"70px"}}>
-            <span className="input-group-addon"><i className="glyphicon glyphicon-lock"></i></span>
-            <input type="password" className="form-control" name="password" placeholder="Password" style={{height:"100%"}}
-              onChange={(e)=> this.setState({password: e.target.value })}/>
-          </div>
-        </form> 
-        <br/><br/>
-        <Link to="/home"><Button bsStyle="primary" block bsSize="large"  
-              onClick={(event) => this.handleSubmit(event)} > Login </Button>
+        <Grid>
+        <Row>
+        <Col md={6}>
+        <InputGroup bsSize="large">
+          <InputGroup.Addon><Glyphicon glyph='user' /></InputGroup.Addon>
+          <FormControl type="text" placeholder="email"
+            onChange={(e) => this.setState({ email: e.target.value })} />
+        </InputGroup>
+        </Col>
+        </Row>
+        <Row>
+        <Col md={6}>
+        <InputGroup bsSize="large">
+          <InputGroup.Addon><Glyphicon glyph='lock' /></InputGroup.Addon>
+          <FormControl type="password" placeholder="password"
+            onChange={(e) => this.setState({ password: e.target.value })} />
+        </InputGroup>
+        </Col>
+        </Row>
+        </Grid>
+        <br /><br />
+        <Link to="/home"><Button bsStyle="primary" block bsSize="large"
+          onClick={(event) => this.handleSubmit(event)} > Login </Button>
         </Link>
         <Link to="/register"><Button block bsSize="large"> Register </Button> </Link>
       </div>
