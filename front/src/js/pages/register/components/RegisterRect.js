@@ -123,7 +123,7 @@ class RegisterRect extends React.Component {
         <br /><br />
         {(showError) ? (<p>check input please </p>) : (null)}
         <Button bsStyle="primary" block bsSize="large"
-          onClick={(event) => this.handleClick(event)}> Create account</Button>
+          onClick={(event) => this.handleClick(event)}>Create account</Button>
         <Link to="/"><Button block bsSize="large">Login</Button>
         </Link>
       </div>
