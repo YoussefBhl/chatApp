@@ -31,7 +31,7 @@ const DateCalculator = (props) => {
     else if (day)
         dateMessage += day + " Days ago";
     else if (hour)
-        dateMessage += hour + " Hour ago";
+        dateMessage += hour + " Hours ago";
     else if (minute)
         dateMessage += minute + " Minutes ago";
     else if (seconds)

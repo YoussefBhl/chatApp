@@ -2,7 +2,7 @@ import React from "react";
 import { ListGroupItem, ListGroup, Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { postsActions } from '../../../actions/posts.actions';
-import DateCalculator from './Date';
+import DateCalculator from './DateCalculator';
 
 class PostsList extends React.Component {
     constructor(props) {

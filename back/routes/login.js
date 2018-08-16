@@ -28,8 +28,9 @@ router.post('/', function (req, res, next) {
             expiresIn: 1440 // expires in 1 hour
           });
           let userDetail = result.n.properties;
+          userDetail['id'] =  result.n._id;
           delete userDetail.password;
-          console.log(userDetail)
+          console.log(result.n)
           res.json({ "code": 200, token: token, user: userDetail });
         }
         else {
